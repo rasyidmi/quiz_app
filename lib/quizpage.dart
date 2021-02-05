@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'quizbrain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class QuizPage extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _QuizPageState extends State<QuizPage> {
     alertAlignment: Alignment.center,
   );
 
-  void checkAnswer(bool answer) {
+  void checkAnswer(int answer) {
     setState(() {
       if (questionBank.getAnswer(questionNumber) == answer) {
         scoreKeeper.add(Icon(Icons.check, color: Colors.green));
@@ -109,42 +110,91 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: FlatButton(
-                    textColor: Colors.white,
-                    color: Colors.green,
-                    child: Text(
-                      'True',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
+              Row(children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: FlatButton(
+                      textColor: Colors.white,
+                      color: Colors.blue,
+                      child: AutoSizeText(
+                        questionBank.getAnswers(questionNumber, 0),
+                        minFontSize: 1.0,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                        ),
                       ),
+                      onPressed: () {
+                        checkAnswer(0);
+                      },
                     ),
-                    onPressed: () {
-                      checkAnswer(true);
-                    },
                   ),
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: FlatButton(
-                    color: Colors.red,
-                    child: Text(
-                      'False',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: FlatButton(
+                      color: Colors.blue,
+                      child: AutoSizeText(
+                        questionBank.getAnswers(questionNumber, 1),
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                        ),
                       ),
+                      onPressed: () {
+                        checkAnswer(1);
+                      },
                     ),
-                    onPressed: () {
-                      checkAnswer(false);
-                    },
                   ),
                 ),
+              ]),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: FlatButton(
+                        textColor: Colors.white,
+                        color: Colors.blue,
+                        child: AutoSizeText(
+                          questionBank.getAnswers(questionNumber, 2),
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        onPressed: () {
+                          checkAnswer(2);
+                        },
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: FlatButton(
+                        textColor: Colors.white,
+                        color: Colors.blue,
+                        child: AutoSizeText(
+                          questionBank.getAnswers(questionNumber, 3),
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        onPressed: () {
+                          checkAnswer(3);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Row(
                 children: scoreKeeper,

@@ -1,9 +1,11 @@
 class Question {
-  String qtext;
-  bool qans;
+  String question;
+  int answerIndex;
+  List<String> answers;
 
-  Question(String a, bool b) {
-    qtext = a;
-    qans = b;
+  Question(String a, int b, List<String> c) {
+    question = a;
+    answerIndex = b;
+    answers = c;
   }
 }
